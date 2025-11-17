@@ -88,3 +88,37 @@ public:
         int row, col;
         bool gameOver = false;
 
+        cout << "Welcome to TicTacToe!\n";
+        displayBoard();
+
+        while(!gameOver){
+            cout << "Player " << currentPlayer << " enter row and col (1-3): ";
+            cin >> row >> col;
+            row--; col--; // convert to 0-based index
+
+            if(isValidMove(row,col)){
+                makeMove(row,col);
+                displayBoard();
+
+                if(checkWinner()){
+                    cout << "Player " << currentPlayer << " won!!!\n";
+                    gameOver = true;
+                } else if(isDraw()){
+                    cout << "Its a draw!\n";
+                    gameOver = true;
+                } else {
+                    switchPlayer();
+                }
+
+            } else {
+                cout << "Not a valid move, try again\n";
+            }
+        }
+    }
+};
+
+int main(){
+    TicTacToe game;
+    game.playGame();
+    return 0;
+}
